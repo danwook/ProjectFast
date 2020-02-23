@@ -21,7 +21,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
         user.setEmail("TestUser01@gmail.com");
         user.setPhoneNumber("010-1111-1111");
         user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("admin");
+        user.setCreatedBy("TestUser2");
 
         User newUser = userRepository.save(user);
         System.out.println("newUser : "+newUser);
