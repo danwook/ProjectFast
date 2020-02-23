@@ -1,0 +1,30 @@
+package com.example.study.model.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Data
+@AllArgsConstructor
+@Entity
+public class User{
+    public User() {
+    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String account;
+
+    private String phoneNumber;
+
+    private LocalDateTime createdAt;
+
+    private String createdBy;
+
+    private LocalDateTime updateAt;
+
+    private String updatedBy;
+
+}
