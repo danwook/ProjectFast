@@ -3,8 +3,12 @@ package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.User;
+import static org.junit.Assert.*;
+
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -38,11 +42,33 @@ public class UserRepositoryTest extends StudyApplicationTests {
         });
     }
 
+    @Test
     public void update(){
+        Optional<User> user = userRepository.findById(2L);
+        user.ifPresent(selectUser->{
+            selectUser.setAccount("PPPP");
+            selectUser.setUpdatedAt(LocalDateTime.now());
+            selectUser.setUpdatedBy("update method()");
+
+            userRepository.save(selectUser);
+        });
 
     }
 
+    @Test
+    @Transactional
     public void delete(){
+        Optional<User> user = userRepository.findById(3L);
+
+        Assert.assertTrue(user.isPresent()); //반드시 true여야함.
+
+        user.ifPresent(selectUser->{
+            userRepository.delete(selectUser);
+        });
+
+        Optional<User> deleteUser = userRepository.findById(3L);
+
+        Assert.assertFalse(deleteUser.isPresent()); // 반드시 false여야함
 
     }
 }
