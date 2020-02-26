@@ -45,6 +45,6 @@ public class AdminUser {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
-    
+
 
 }
