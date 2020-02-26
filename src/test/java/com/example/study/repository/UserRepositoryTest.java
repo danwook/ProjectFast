@@ -38,9 +38,8 @@ public class UserRepositoryTest extends StudyApplicationTests {
     public void read(){
 
          //select * from user where id =?
-        
-
-        Optional<User> user = userRepository.findById(7L);
+        //쿼리메소드
+        Optional<User> user = userRepository.findByAccount("TestUser03");
         user.ifPresent(selectUser -> {
             selectUser.getOrderDetailList().stream().forEach(orderDetail -> {
                 Item item = orderDetail.getItem();
