@@ -4,17 +4,16 @@ package com.example.study.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"user","item"})
 public class OrderDetail {
 
     @Id
@@ -23,8 +22,13 @@ public class OrderDetail {
 
     private LocalDateTime orderAt;
 
-    private Long userId;
+    // N이고 유저는 1 자신은 여러개지만 유저는 1개다.
+    @ManyToOne
+    private User user; // user_id.
 
-    private Long itemId;
+    // 자신은 1, 아이템은 N이다
+
+    @ManyToOne
+    private Item item;
 
 }

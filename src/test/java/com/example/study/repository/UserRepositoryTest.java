@@ -2,6 +2,7 @@ package com.example.study.repository;
 
 
 import com.example.study.StudyApplicationTests;
+import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
 import static org.junit.Assert.*;
 
@@ -30,21 +31,28 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
         User newUser = userRepository.save(user);
         System.out.println("newUser : "+newUser);
-
     }
 
     @Test
+    @Transactional
     public void read(){
-        Optional<User> user = userRepository.findById(2L);
+
+         //select * from user where id =?
+        
+
+        Optional<User> user = userRepository.findById(7L);
         user.ifPresent(selectUser -> {
-            System.out.println("user : "+selectUser);
-            System.out.println("email : "+selectUser.getEmail());
+            selectUser.getOrderDetailList().stream().forEach(orderDetail -> {
+                Item item = orderDetail.getItem();
+                System.out.println(item); //객체반환
+            });
         });
     }
 
     @Test
     public void update(){
         Optional<User> user = userRepository.findById(2L);
+
         user.ifPresent(selectUser->{
             selectUser.setAccount("PPPP");
             selectUser.setUpdatedAt(LocalDateTime.now());
