@@ -3,6 +3,7 @@ package com.example.study.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"orderDetailList","partner"})
 public class Item {
 
     @Id
@@ -41,9 +43,12 @@ public class Item {
 
     private LocalDateTime updatedAt;
 
-    private String updatedBy;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<OrderDetail> orderDetailList;
 
-    private Long partnerId;
+    //Item N : 1 Partner
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Partner partner;
 
     // 자신은 1, orderdetail은 N
     // LAZY = 지연로딩 , EAGER = 즉시로딩

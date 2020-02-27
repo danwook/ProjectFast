@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"orderGroup"})
+@ToString(exclude = {"orderGroup","item"})
 public class OrderDetail {
 
     @Id
@@ -37,9 +37,11 @@ public class OrderDetail {
 
     private String updatedBy;
 
-    private Long itemId;
+    // OrderDetail N : Item 1 : 아이템마다 여러주문건이 있을수 있기 때문.
+    @ManyToOne(fetch =  FetchType.LAZY)
+    private Item item;
 
-    //자신은 1, OrderGroup는 N임
+    //OrderDetail N, OrderGroup는 1임
     @ManyToOne(fetch = FetchType.LAZY)
     private OrderGroup orderGroup; //연결되고자 하는 mappedBy에 변수명과 같아야함.
 
