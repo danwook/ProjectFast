@@ -1,5 +1,6 @@
 package com.example.study.repository;
 
+import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.Partner;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
-public class PartnerRepositoryTest {
+public class PartnerRepositoryTest extends StudyApplicationTests {
 
     @Autowired
     private PartnerRepository partnerRepository;
@@ -45,8 +46,4 @@ public class PartnerRepositoryTest {
 
     }
 
-    @Test
-    public void read(){
-
-    }
 }

@@ -52,7 +52,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Transactional
     public void read(){
 
-         //select * from user where id =?
+        //select * from user where id =?
         //쿼리메소드
 //        Optional<User> user = userRepository.findByAccount("TestUser03");
 //        user.ifPresent(selectUser -> {
@@ -62,7 +62,27 @@ public class UserRepositoryTest extends StudyApplicationTests {
 //            });
 //        });
         User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-1111-2222");
-        Assert.assertNotNull(user);
+        if(user!=null){
+
+            user.getOrderGroupList().stream().forEach(orderGroup -> {
+
+                System.out.println("=======주문묶음=========");
+                System.out.println(orderGroup.getRevName());
+                System.out.println(orderGroup.getTotalPrice());
+                System.out.println(orderGroup.getTotalQuantity());
+                System.out.println(orderGroup.getRevAddress());
+
+                System.out.println("=======주문상세=========");
+                orderGroup.getOrderDetailList().forEach(orderDetail -> {
+                    System.out.println(orderDetail.getStatus());
+                    System.out.println(orderDetail.getArrivalDate());
+                });
+            });
+
+            Assert.assertNotNull(user);
+        }
+
+
     }
 
     @Test

@@ -3,16 +3,19 @@ package com.example.study.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraintvalidation.SupportedValidationTarget;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.example.study.model.entity.OrderGroup;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"orderGroup"})
 public class User{
 
     @Id
@@ -40,5 +43,10 @@ public class User{
     private LocalDateTime updatedAt;
 
     private String updatedBy;
+
+    // User 1 : OrderGroup N
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<OrderGroup> orderGroupList;
+    //원투매니여서 받아오는걸 list로 해줘야함.
 
 }
