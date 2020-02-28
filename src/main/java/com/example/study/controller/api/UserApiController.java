@@ -5,9 +5,12 @@ import com.example.study.model.network.Header;
 import com.example.study.model.network.request.UserApiRequest;
 import com.example.study.model.network.response.UserApiResponse;
 import com.example.study.service.UserApiLogicService;
+import jdk.internal.jline.internal.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
@@ -18,6 +21,7 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
     @Override
     @PostMapping("") //  api/user 라는 주소로 매핑됨
     public Header<UserApiResponse> create(@RequestBody Header<UserApiRequest> userApiRequest) {
+        Log.info("{}",userApiRequest);
         return userApiLogicService.create(userApiRequest);
     }
 
