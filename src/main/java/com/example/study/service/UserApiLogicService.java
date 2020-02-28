@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class UserApiLogicService implements CrudInterface<UserApiRequest, UserApiResponse> {
@@ -39,15 +40,18 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
         // 3. 생성된 데이터 -> userApiResponse return
         // 즉 유저객체를 데이터를 만들기때문에.. 리드업데이트에서도 사용할수 있기에 따로 만든다 메서드를
-
-
         return response(newUser);
 
     }
 
     @Override
     public Header<UserApiResponse> read(Long id) {
-        return null;
+        // id -> repository getOne, getById
+        return userRepository.findById(id)
+                .map(user-> response(user))
+                .orElseGet(
+                        ()->Header.ERROR("데이터 없음")
+                );
     }
 
     @Override

@@ -26,9 +26,9 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
     }
 
     @Override
-    @GetMapping("{id}") // api/user/{id}로 매핑됨
+    @GetMapping("/{id}") // api/user/{id}로 매핑됨
     public Header<UserApiResponse> read(@PathVariable(name = "id") Long id) {
-        return null;
+        return userApiLogicService.read(id);
     }
 
     @Override
@@ -42,4 +42,6 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
     public Header delete(@PathVariable(name = "id") Long id) {
         return null;
     }
+
+
 }
