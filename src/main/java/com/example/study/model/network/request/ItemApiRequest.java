@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ItemApiRequest {
-
+    //dto 역할
     private Long id;
 
     private String status;
@@ -33,6 +33,5 @@ public class ItemApiRequest {
     private LocalDateTime unRegisteredAt;
 
     private Long partnerId;
-
 
 }

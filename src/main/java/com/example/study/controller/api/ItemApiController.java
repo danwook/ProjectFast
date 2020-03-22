@@ -23,7 +23,7 @@ public class ItemApiController implements CrudInterface<ItemApiRequest, ItemApiR
     }
 
     @Override
-    @GetMapping("{id}")
+    @GetMapping("{id}") // -> api/item/1~~~1아이디~
     public Header<ItemApiResponse> read(@PathVariable Long id) {
         return null;
     }
@@ -39,5 +39,7 @@ public class ItemApiController implements CrudInterface<ItemApiRequest, ItemApiR
     public Header delete(@PathVariable Long id) {
         return null;
     }
+
+
 
 }
