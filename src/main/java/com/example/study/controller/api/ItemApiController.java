@@ -18,14 +18,15 @@ public class ItemApiController implements CrudInterface<ItemApiRequest, ItemApiR
     @Override
     @PostMapping("") // api/item 라는 주소로 매핑
     public Header<ItemApiResponse> create(@RequestBody  Header<ItemApiRequest> request) {
-
-        return null;
+        return itemApiLogicService.create(request);
     }
 
     @Override
     @GetMapping("{id}") // -> api/item/1~~~1아이디~
     public Header<ItemApiResponse> read(@PathVariable Long id) {
-        return null;
+
+        return itemApiLogicService.read(id);
+
     }
 
     @Override
